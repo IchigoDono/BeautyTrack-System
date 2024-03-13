@@ -29,5 +29,14 @@ namespace BeautyTrack_System.Mapper
 
             return registerModel;
         }
+        public static RestorePasswordModel GetPasswordRestoreModel(RestorePasswordViewModel restorePasswordViewModel)
+        {
+            RestorePasswordModel restorePasswordModel = new RestorePasswordModel
+            {
+                Email = restorePasswordViewModel.Email,
+                Password = restorePasswordViewModel.Password
+            };
+            return restorePasswordModel;
+        }
     }
 }

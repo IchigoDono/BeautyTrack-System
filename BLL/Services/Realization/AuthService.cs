@@ -65,5 +65,28 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             serviceResponse.Data = MapperInitializer.GetUserModel(user);
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<Boolean>> RestorePassword(RestorePasswordModel restorePasswordModel)
+        {
+            ServiceResponse<Boolean> serviceResponse = new ServiceResponse<Boolean>();
+
+            Boolean isUserExists = await _authRepository.IsUserExistByEmail(restorePasswordModel.Email);
+
+            if (!isUserExists)
+            {
+                serviceResponse.Message = "User is not already exist";
+                return serviceResponse;
+            }
+
+            UserEntityModel user = await _authRepository.Get(restorePasswordModel.Email);
+            PasswordModel passwordModel = PasswordHelper.CreatePasswordHash(restorePasswordModel.Password);
+            user.PasswordHash = passwordModel.PasswordHash;
+            user.PasswordSalt = passwordModel.PasswordSalt;
+            await _authRepository.AddUser(user);
+
+            serviceResponse.IsSuccess = true;
+            serviceResponse.Data = true;
+            return serviceResponse;
+        }
     }
 }

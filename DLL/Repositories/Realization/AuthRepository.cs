@@ -32,5 +32,11 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
             return success;
 
         }
+
+        public async Task UpdateUser(UserEntityModel userEntityModel)
+        {
+             _applicationContext.Users.Update(userEntityModel);
+            await _applicationContext.SaveChangesAsync();
+        }
     }
 }

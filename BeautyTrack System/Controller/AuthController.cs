@@ -31,5 +31,12 @@ namespace BeautyTrack_System.Controller
             ServiceResponse<JwtModel> response = await _authService.Login(MapperInitializer.GetLoginModel(loginViewModel));
             return Ok(response);
         }
+
+        [HttpPost("RestorePassword")]
+        public async Task<IActionResult> RestorePassword(RestorePasswordViewModel restorePasswordViewModel)
+        {
+            ServiceResponse<Boolean> response = await _authService.RestorePassword(MapperInitializer.GetPasswordRestoreModel(restorePasswordViewModel));
+            return Ok(response);
+        }
     }
 }

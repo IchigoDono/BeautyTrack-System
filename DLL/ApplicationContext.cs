@@ -15,5 +15,13 @@ namespace DLL
             : base(options) 
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntityModel>()
+          .HasKey(x => x.Id);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

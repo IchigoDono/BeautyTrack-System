@@ -8,5 +8,6 @@ namespace BeautyTrackSystem.BLL.Services.Interfaces
     {
         Task<ServiceResponse<UserModel>> Register(RegisterModel registerModel);
         Task<ServiceResponse<JwtModel>> Login(LoginModel loginModel);
+        Task<ServiceResponse<Boolean>>RestorePassword(RestorePasswordModel restorePasswordModel);
     }
 }

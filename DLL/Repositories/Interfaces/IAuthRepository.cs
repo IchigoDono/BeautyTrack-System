@@ -5,6 +5,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Interfaces
     public interface IAuthRepository
     {
         Task AddUser(UserEntityModel userEntityModel);
+        Task UpdateUser(UserEntityModel userEntityModel);
         Task<Boolean> IsUserExistByEmail(String email);
         Task<UserEntityModel> Get(String email);
     }

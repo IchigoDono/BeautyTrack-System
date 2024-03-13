@@ -1,4 +1,6 @@
 ﻿using BeautyTrackSystem.DLL.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeautyTrackSystem.DLL.Models.Entities
 {
@@ -10,6 +12,6 @@ namespace BeautyTrackSystem.DLL.Models.Entities
         public String Email { get; set; }
         public Byte[] PasswordHash { get; set; }
         public Byte[] PasswordSalt { get; set; }
-        public Roles RoleId { get; set; }
+        //public Roles RoleId { get; set; }
     }
 }
