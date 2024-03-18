@@ -1,4 +1,4 @@
-﻿using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrackSystem.BLL.Models.AuthModels;
 using System.Security.Cryptography;
 using System.Text;
 

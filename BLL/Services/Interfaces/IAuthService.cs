@@ -1,5 +1,4 @@
-﻿using BeautyTrack_System.Bll.Models;
-using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrackSystem.BLL.Models.AuthModels;
 using BeautyTrackSystem.BLL.Models.Responses;
 
 namespace BeautyTrackSystem.BLL.Services.Interfaces

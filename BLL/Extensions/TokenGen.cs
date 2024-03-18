@@ -1,5 +1,4 @@
-﻿using BeautyTrackSystem.BLL.Helpers;
-using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrackSystem.BLL.Models.AuthModels;
 using BeautyTrackSystem.DLL.Models.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

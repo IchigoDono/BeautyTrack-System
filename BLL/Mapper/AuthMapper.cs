@@ -1,10 +1,9 @@
-﻿using BeautyTrack_System.Bll.Models;
-using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrackSystem.BLL.Models.AuthModels;
 using BeautyTrackSystem.DLL.Models.Entities;
 
 namespace BeautyTrackSystem.BLL.Mapper
 {
-    public class MapperInitializer
+    public class AuthMapper
     {
         public static UserEntityModel GetUserEntityModel(RegisterModel registerModel)
         {

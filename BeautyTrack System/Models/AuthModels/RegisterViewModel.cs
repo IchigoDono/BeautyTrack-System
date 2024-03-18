@@ -1,23 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BeautyTrack_System.API.Models
+namespace BeautyTrack_System.Models.AuthModels
 {
     public class RegisterViewModel
     {
         [Required]
-        public String FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(256, ErrorMessage = "Your email is too large")]
         [DataType(DataType.EmailAddress)]
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [StringLength(60, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        public String Password { get; set; }
+        public string Password { get; set; }
     }
 }

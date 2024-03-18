@@ -1,7 +1,6 @@
-﻿using BeautyTrack_System.API.Models;
-using BeautyTrack_System.Mapper;
-using BeautyTrack_System.Models;
-using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrack_System.Mapper;
+using BeautyTrack_System.Models.AuthModels;
+using BeautyTrackSystem.BLL.Models.AuthModels;
 using BeautyTrackSystem.BLL.Models.Responses;
 using BeautyTrackSystem.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -21,21 +20,21 @@ namespace BeautyTrack_System.Controller
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            ServiceResponse<UserModel> response = await _authService.Register(MapperInitializer.GetRegisterModel(registerViewModel));
+            ServiceResponse<UserModel> response = await _authService.Register(AuthMapper.GetRegisterModel(registerViewModel));
             return Ok(response);
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            ServiceResponse<JwtModel> response = await _authService.Login(MapperInitializer.GetLoginModel(loginViewModel));
+            ServiceResponse<JwtModel> response = await _authService.Login(AuthMapper.GetLoginModel(loginViewModel));
             return Ok(response);
         }
 
         [HttpPost("RestorePassword")]
         public async Task<IActionResult> RestorePassword(RestorePasswordViewModel restorePasswordViewModel)
         {
-            ServiceResponse<Boolean> response = await _authService.RestorePassword(MapperInitializer.GetPasswordRestoreModel(restorePasswordViewModel));
+            ServiceResponse<Boolean> response = await _authService.RestorePassword(AuthMapper.GetPasswordRestoreModel(restorePasswordViewModel));
             return Ok(response);
         }
     }

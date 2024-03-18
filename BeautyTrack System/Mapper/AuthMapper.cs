@@ -1,11 +1,9 @@
-﻿using BeautyTrack_System.API.Models;
-using BeautyTrack_System.Bll.Models;
-using BeautyTrack_System.Models;
-using BeautyTrackSystem.BLL.Models;
+﻿using BeautyTrack_System.Models.AuthModels;
+using BeautyTrackSystem.BLL.Models.AuthModels;
 
 namespace BeautyTrack_System.Mapper
 {
-    public class MapperInitializer
+    public class AuthMapper
     {
         public static LoginModel GetLoginModel(LoginViewModel loginViewModel)
         {

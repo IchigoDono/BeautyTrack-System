@@ -1,7 +1,6 @@
-﻿using BeautyTrack_System.Bll.Models;
-using BeautyTrackSystem.BLL.Extensions;
+﻿using BeautyTrackSystem.BLL.Extensions;
 using BeautyTrackSystem.BLL.Mapper;
-using BeautyTrackSystem.BLL.Models;
+using BeautyTrackSystem.BLL.Models.AuthModels;
 using BeautyTrackSystem.BLL.Models.Responses;
 using BeautyTrackSystem.BLL.Services.Interfaces;
 using BeautyTrackSystem.DLL.Models.Entities;
@@ -55,14 +54,14 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            UserEntityModel user = MapperInitializer.GetUserEntityModel(registerModel);
+            UserEntityModel user = AuthMapper.GetUserEntityModel(registerModel);
             PasswordModel passwordModel = PasswordHelper.CreatePasswordHash(registerModel.Password);
             user.PasswordHash = passwordModel.PasswordHash;
             user.PasswordSalt = passwordModel.PasswordSalt;
             await _authRepository.AddUser(user);
 
             serviceResponse.IsSuccess = true;
-            serviceResponse.Data = MapperInitializer.GetUserModel(user);
+            serviceResponse.Data = AuthMapper.GetUserModel(user);
             return serviceResponse;
         }
 
@@ -82,7 +81,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             PasswordModel passwordModel = PasswordHelper.CreatePasswordHash(restorePasswordModel.Password);
             user.PasswordHash = passwordModel.PasswordHash;
             user.PasswordSalt = passwordModel.PasswordSalt;
-            await _authRepository.AddUser(user);
+            await _authRepository.UpdateUser(user);
 
             serviceResponse.IsSuccess = true;
             serviceResponse.Data = true;
