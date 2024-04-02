@@ -1,6 +1,6 @@
 ﻿namespace BeautyTrackSystem.BLL.Models.AuthModels
 {
-    public class RegisterModel
+    public class RegisterDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

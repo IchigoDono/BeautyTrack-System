@@ -1,6 +1,6 @@
 ﻿namespace BeautyTrackSystem.DLL.Models.Entities
 {
-    public class AppointmentEntityModel
+    public class Appointment
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

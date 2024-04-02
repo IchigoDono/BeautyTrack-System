@@ -1,6 +1,6 @@
 ﻿namespace BeautyTrackSystem.BLL.Models.PatientModels
 {
-    public class PatientModel
+    public class PatientDTO
     {
         public Int32? Id { get; set; }
         public String Name { get; set; }

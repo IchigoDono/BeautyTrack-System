@@ -6,10 +6,10 @@ namespace BeautyTrackSystem.BLL.Extensions
 {
     public static class PasswordHelper
     {
-        internal static PasswordModel CreatePasswordHash(String password)
+        internal static PasswordDTO CreatePasswordHash(String password)
         {
             using HMACSHA512 hmac = new HMACSHA512();
-            PasswordModel passEntity = new PasswordModel
+            PasswordDTO passEntity = new PasswordDTO
             {
                 PasswordSalt = hmac.Key,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password))

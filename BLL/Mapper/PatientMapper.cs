@@ -5,9 +5,22 @@ namespace BeautyTrackSystem.BLL.Mapper
 {
     public class PatientMapper
     {
-        public static PatientEntityModel GetPatientEntityModel(PatientModel patientModel)
+        public static Patient GetPatientAddModel(PatientDTO patientModel)
         {
-            PatientEntityModel patientEntityModel = new PatientEntityModel
+            Patient patientEntityModel = new Patient
+            {
+                Name = patientModel.Name,
+                Surname = patientModel.Surname,
+                Patronymic = patientModel.Patronymic,
+                Birthday = patientModel.Birthday,
+                PhomeNumber = patientModel.PhomeNumber
+            };
+            return patientEntityModel;
+        }
+
+        public static Patient GetPatientUpdateModel(PatientDTO patientModel)
+        {
+            Patient patientEntityModel = new Patient
             {
                 Id = patientModel.Id,
                 Name = patientModel.Name,
@@ -19,9 +32,9 @@ namespace BeautyTrackSystem.BLL.Mapper
             return patientEntityModel;
         }
 
-        public static PatientModel GetPatientModel(PatientEntityModel patientEntityModel)
+        public static PatientDTO GetPatientModel(Patient patientEntityModel)
         {
-            PatientModel patientModel = new PatientModel
+            PatientDTO patientModel = new PatientDTO
             {
                 Id = patientEntityModel.Id,
                 Name = patientEntityModel.Name,

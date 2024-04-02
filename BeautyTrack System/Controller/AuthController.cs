@@ -20,14 +20,14 @@ namespace BeautyTrack_System.Controller
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            ServiceResponse<UserModel> response = await _authService.Register(AuthMapper.GetRegisterModel(registerViewModel));
+            ServiceResponse<UserDTO> response = await _authService.Register(AuthMapper.GetRegisterModel(registerViewModel));
             return Ok(response);
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            ServiceResponse<JwtModel> response = await _authService.Login(AuthMapper.GetLoginModel(loginViewModel));
+            ServiceResponse<JwtDTO> response = await _authService.Login(AuthMapper.GetLoginModel(loginViewModel));
             return Ok(response);
         }
 

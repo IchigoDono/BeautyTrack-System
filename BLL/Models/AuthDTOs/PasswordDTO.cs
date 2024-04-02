@@ -1,6 +1,6 @@
 ﻿namespace BeautyTrackSystem.BLL.Models.AuthModels
 {
-    public class PasswordModel
+    public class PasswordDTO
     {
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }

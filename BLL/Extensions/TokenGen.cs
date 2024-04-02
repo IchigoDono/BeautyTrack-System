@@ -9,9 +9,9 @@ namespace BeautyTrackSystem.BLL.Extensions
 {
     public class TokenGen
     {
-        internal static JwtModel GenerateToken(UserEntityModel user)
+        internal static JwtDTO GenerateToken(User user)
         {
-            JwtModel jwtViewModel = new JwtModel();
+            JwtDTO jwtViewModel = new JwtDTO();
 
             List<Claim> claims = new List<Claim>
             {

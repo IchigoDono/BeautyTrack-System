@@ -5,9 +5,9 @@ namespace BeautyTrackSystem.BLL.Mapper
 {
     public class AuthMapper
     {
-        public static UserEntityModel GetUserEntityModel(RegisterModel registerModel)
+        public static User GetUserEntityModel(RegisterDTO registerModel)
         {
-            UserEntityModel user = new UserEntityModel
+            User user = new User
             {
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
@@ -15,9 +15,9 @@ namespace BeautyTrackSystem.BLL.Mapper
             };
             return user;
         }
-        public static UserModel GetUserModel(UserEntityModel userEntityModel)
+        public static UserDTO GetUserModel(User userEntityModel)
         {
-            UserModel user = new UserModel
+            UserDTO user = new UserDTO
             {
                 FirstName = userEntityModel.FirstName,
                 LastName = userEntityModel.LastName,

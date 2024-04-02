@@ -20,27 +20,27 @@ namespace BeautyTrack_System.Controller
         [HttpGet("GetPatientByPhone")]
         public async Task<IActionResult> GetPatientByPhoneNumber(String phoneNumber)
         {
-            ServiceResponse<PatientModel> response = await _patientService.GetPatientByPhone(phoneNumber);
+            ServiceResponse<PatientDTO> response = await _patientService.GetPatientByPhone(phoneNumber);
             return Ok(response);
         }
         [HttpGet("GetPatientList")]
         public async Task<IActionResult> GetPatientList()
         {
-            ServiceResponse<List<PatientModel>> response = await _patientService.GetPatientList();
+            ServiceResponse<List<PatientDTO>> response = await _patientService.GetPatientList();
             return Ok(response);
         }
 
         [HttpPost("AddPatient")]
         public async Task<IActionResult> AddPatient(PatientViewModel patientViewModel)
         {
-            ServiceResponse<PatientModel> response = await _patientService.AddPatient(PatientMapper.GetPatientModel(patientViewModel));
+            ServiceResponse<PatientDTO> response = await _patientService.AddPatient(PatientMapper.GetPatientModel(patientViewModel));
             return Ok(response);
         }
 
         [HttpPut("UpdatePatient")]
         public async Task<IActionResult> UpdatePatient(PatientViewModel patientViewModel)
         {
-            ServiceResponse<PatientModel> response = await _patientService.UpdatePatient(PatientMapper.GetPatientModel(patientViewModel));
+            ServiceResponse<PatientDTO> response = await _patientService.UpdatePatient(PatientMapper.GetPatientModel(patientViewModel));
             return Ok(response);
         }
 

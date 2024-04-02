@@ -1,6 +1,6 @@
 ﻿namespace BeautyTrackSystem.DLL.Models.Entities
 {
-    public class PatientEntityModel
+    public class Patient
     {
         public Int32? Id { get; set; }
         public String Name { get; set; }

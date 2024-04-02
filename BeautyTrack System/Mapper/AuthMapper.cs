@@ -5,9 +5,9 @@ namespace BeautyTrack_System.Mapper
 {
     public class AuthMapper
     {
-        public static LoginModel GetLoginModel(LoginViewModel loginViewModel)
+        public static LoginDTO GetLoginModel(LoginViewModel loginViewModel)
         {
-            LoginModel login = new LoginModel
+            LoginDTO login = new LoginDTO
             {
                 Email = loginViewModel.Email,
                 Password = loginViewModel.Password
@@ -15,9 +15,9 @@ namespace BeautyTrack_System.Mapper
             return login;
         }
 
-        public static RegisterModel GetRegisterModel(RegisterViewModel registerViewModel)
+        public static RegisterDTO GetRegisterModel(RegisterViewModel registerViewModel)
         {
-            RegisterModel registerModel = new RegisterModel 
+            RegisterDTO registerModel = new RegisterDTO 
             {
                 FirstName = registerViewModel.FirstName,
                 LastName = registerViewModel.LastName,
@@ -27,9 +27,9 @@ namespace BeautyTrack_System.Mapper
 
             return registerModel;
         }
-        public static RestorePasswordModel GetPasswordRestoreModel(RestorePasswordViewModel restorePasswordViewModel)
+        public static RestorePasswordDTO GetPasswordRestoreModel(RestorePasswordViewModel restorePasswordViewModel)
         {
-            RestorePasswordModel restorePasswordModel = new RestorePasswordModel
+            RestorePasswordDTO restorePasswordModel = new RestorePasswordDTO
             {
                 Email = restorePasswordViewModel.Email,
                 Password = restorePasswordViewModel.Password

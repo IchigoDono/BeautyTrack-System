@@ -6,10 +6,10 @@ namespace DLL
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<PatientEntityModel> Patients { get; set; }
-        public DbSet<ProcedureEntityModel> Procedures { get; set; }
-        public DbSet<AppointmentEntityModel> Appointments { get; set; }
-        public DbSet<UserEntityModel> Users { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) 
             : base(options) 
@@ -18,7 +18,7 @@ namespace DLL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserEntityModel>()
+            modelBuilder.Entity<User>()
           .HasKey(x => x.Id);
 
             base.OnModelCreating(modelBuilder);

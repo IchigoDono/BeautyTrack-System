@@ -5,16 +5,16 @@ namespace BeautyTrack_System.Mapper
 {
     public class PatientMapper
     {
-        public static PatientModel GetPatientModel(PatientViewModel loginViewModel)
+        public static PatientDTO GetPatientModel(PatientViewModel patientViewModel)
         {
-            PatientModel patient = new PatientModel
+            PatientDTO patient = new PatientDTO
             {
-                Id = loginViewModel.Id,
-                Name = loginViewModel.Name,
-                Surname = loginViewModel.Surname,   
-                Patronymic = loginViewModel.Patronymic,
-                Birthday = loginViewModel.Birthday,
-                PhomeNumber = loginViewModel.PhomeNumber
+                Id = patientViewModel.Id,
+                Name = patientViewModel.Name,
+                Surname = patientViewModel.Surname,   
+                Patronymic = patientViewModel.Patronymic,
+                Birthday = patientViewModel.Birthday,
+                PhomeNumber = patientViewModel.PhomeNumber
             };
             return patient;
         }

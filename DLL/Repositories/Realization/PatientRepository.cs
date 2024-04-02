@@ -13,15 +13,15 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
             _applicationContext = applicationContext;
         }
 
-        public async Task<PatientEntityModel> GetByPhone(String phoneNumber)
+        public async Task<Patient> GetByPhone(String phoneNumber)
         {
-            PatientEntityModel patientEntityModel =
+            Patient patientEntityModel =
                  await _applicationContext.Patients.FirstOrDefaultAsync(u => u.PhomeNumber.Equals(phoneNumber));
             return patientEntityModel;
         }
-        public async Task<List<PatientEntityModel>> GetAll()
+        public async Task<List<Patient>> GetAll()
         {
-            List<PatientEntityModel> patientEntityModels =
+            List<Patient> patientEntityModels =
                 await _applicationContext.Patients.ToListAsync();
             return patientEntityModels;
         }
@@ -39,19 +39,19 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
 
         }
 
-        public async Task AddPatient(PatientEntityModel patientEntityModel)
+        public async Task AddPatient(Patient patientEntityModel)
         {
             _applicationContext.Patients.Add(patientEntityModel);
             await _applicationContext.SaveChangesAsync();
         }
 
-        public async Task Delete(PatientEntityModel patientEntityModel)
+        public async Task Delete(Patient patientEntityModel)
         {
             _applicationContext.Patients.Remove(patientEntityModel);
             await _applicationContext.SaveChangesAsync();
         }
 
-        public async Task UpdatePatient(PatientEntityModel patientEntityModel)
+        public async Task UpdatePatient(Patient patientEntityModel)
         {
             _applicationContext.Patients.Update(patientEntityModel);
             await _applicationContext.SaveChangesAsync();

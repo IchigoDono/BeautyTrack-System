@@ -12,16 +12,16 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
         {
             _applicationContext = applicationContext;
         }
-        public async Task AddUser(UserEntityModel userEntityModel)
+        public async Task AddUser(User userEntityModel)
         {
             _applicationContext.Users.Add(userEntityModel);
             await _applicationContext.SaveChangesAsync();
 
         }
 
-        public async Task<UserEntityModel> Get(String email)
+        public async Task<User> Get(String email)
         {
-            UserEntityModel userEntityModel = 
+            User userEntityModel = 
                  await _applicationContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
             return userEntityModel;
         }
@@ -33,7 +33,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
 
         }
 
-        public async Task UpdateUser(UserEntityModel userEntityModel)
+        public async Task UpdateUser(User userEntityModel)
         {
              _applicationContext.Users.Update(userEntityModel);
             await _applicationContext.SaveChangesAsync();

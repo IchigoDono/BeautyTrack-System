@@ -2,7 +2,7 @@
 
 namespace BeautyTrackSystem.DLL.Models.Entities
 {
-    public class UserEntityModel
+    public class User
     {
         public Int32 Id { get; set; }
         public String FirstName { get; set; }

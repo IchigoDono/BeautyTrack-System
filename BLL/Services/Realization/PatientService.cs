@@ -15,11 +15,11 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             _patientRepository = patientRepository;
         }
 
-        public async Task<ServiceResponse<List<PatientModel>>> GetPatientList()
+        public async Task<ServiceResponse<List<PatientDTO>>> GetPatientList()
         {
-            ServiceResponse<List<PatientModel>> serviceResponse = new ServiceResponse<List<PatientModel>>();
+            ServiceResponse<List<PatientDTO>> serviceResponse = new ServiceResponse<List<PatientDTO>>();
 
-            List<PatientEntityModel> patientEntityModel = await _patientRepository.GetAll();
+            List<Patient> patientEntityModel = await _patientRepository.GetAll();
 
             if (patientEntityModel == null)
             {
@@ -27,7 +27,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            List<PatientModel> patientModels = patientEntityModel
+            List<PatientDTO> patientModels = patientEntityModel
                 .Select(patientEntity => PatientMapper.GetPatientModel(patientEntity))
                 .ToList();
 
@@ -35,11 +35,11 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             serviceResponse.Data = patientModels;
             return serviceResponse;
         }
-        public async Task<ServiceResponse<PatientModel>> GetPatientByPhone(String phoneNumber)
+        public async Task<ServiceResponse<PatientDTO>> GetPatientByPhone(String phoneNumber)
         {
-            ServiceResponse<PatientModel> serviceResponse = new ServiceResponse<PatientModel>();
+            ServiceResponse<PatientDTO> serviceResponse = new ServiceResponse<PatientDTO>();
 
-            PatientEntityModel patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
+            Patient patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
 
             if (patientEntityModel == null)
             {
@@ -52,9 +52,9 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<PatientModel>> AddPatient(PatientModel patientModel)
+        public async Task<ServiceResponse<PatientDTO>> AddPatient(PatientDTO patientModel)
         {
-            ServiceResponse<PatientModel> serviceResponse = new ServiceResponse<PatientModel>();
+            ServiceResponse<PatientDTO> serviceResponse = new ServiceResponse<PatientDTO>();
 
             Boolean isPatientExists = await _patientRepository.IsPatientExistByPhone(patientModel.PhomeNumber);
             if (isPatientExists)
@@ -63,7 +63,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            PatientEntityModel patientEntityModel = PatientMapper.GetPatientEntityModel(patientModel);
+            Patient patientEntityModel = PatientMapper.GetPatientAddModel(patientModel);
 
             await _patientRepository.AddPatient(patientEntityModel);
 
@@ -71,18 +71,25 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             serviceResponse.Data = patientModel;
             return serviceResponse;
         }
-        public async Task<ServiceResponse<PatientModel>> UpdatePatient(PatientModel patientModel)
+        public async Task<ServiceResponse<PatientDTO>> UpdatePatient(PatientDTO patientModel)
         {
-            ServiceResponse<PatientModel> serviceResponse = new ServiceResponse<PatientModel>();
+            ServiceResponse<PatientDTO> serviceResponse = new ServiceResponse<PatientDTO>();
 
-            Boolean isPatientExists = await _patientRepository.IsPatientExistById(patientModel.Id);
-            if (!isPatientExists)
+            Boolean isPatientIdExists = await _patientRepository.IsPatientExistById(patientModel.Id);
+            if (!isPatientIdExists)
             {
                 serviceResponse.Message = "Patient is not exist";
                 return serviceResponse;
             }
 
-            PatientEntityModel patientEntityModel = PatientMapper.GetPatientEntityModel(patientModel);
+            Boolean isPatientNameExists = await _patientRepository.IsPatientExistByPhone(patientModel.PhomeNumber);
+            if (isPatientNameExists)
+            {
+                serviceResponse.Message = "Patient already exist";
+                return serviceResponse;
+            }
+
+            Patient patientEntityModel = PatientMapper.GetPatientUpdateModel(patientModel);
 
             await _patientRepository.UpdatePatient(patientEntityModel);
 
@@ -103,7 +110,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            PatientEntityModel patientEntityModel = new PatientEntityModel();
+            Patient patientEntityModel = new Patient();
             patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
 
             await _patientRepository.Delete(patientEntityModel);

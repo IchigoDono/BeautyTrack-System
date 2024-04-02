@@ -5,8 +5,8 @@ namespace BeautyTrackSystem.BLL.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<ServiceResponse<UserModel>> Register(RegisterModel registerModel);
-        Task<ServiceResponse<JwtModel>> Login(LoginModel loginModel);
-        Task<ServiceResponse<Boolean>>RestorePassword(RestorePasswordModel restorePasswordModel);
+        Task<ServiceResponse<UserDTO>> Register(RegisterDTO registerModel);
+        Task<ServiceResponse<JwtDTO>> Login(LoginDTO loginModel);
+        Task<ServiceResponse<Boolean>>RestorePassword(RestorePasswordDTO restorePasswordModel);
     }
 }

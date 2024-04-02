@@ -16,10 +16,10 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             _authRepository = authRepository;
         }
 
-        public async Task<ServiceResponse<JwtModel>> Login(LoginModel loginModel)
+        public async Task<ServiceResponse<JwtDTO>> Login(LoginDTO loginModel)
         {
-            ServiceResponse<JwtModel> serviceResponse = new ServiceResponse<JwtModel>();
-            UserEntityModel userEntityModel =  await _authRepository.Get(loginModel.Email);
+            ServiceResponse<JwtDTO> serviceResponse = new ServiceResponse<JwtDTO>();
+            User userEntityModel =  await _authRepository.Get(loginModel.Email);
             if (userEntityModel == null)
             {
                 serviceResponse.Message = "Incorrect username or password";
@@ -35,16 +35,16 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            JwtModel jwtViewModel = TokenGen.GenerateToken(userEntityModel);
+            JwtDTO jwtViewModel = TokenGen.GenerateToken(userEntityModel);
 
             serviceResponse.IsSuccess = true;
             serviceResponse.Data = jwtViewModel;
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<UserModel>> Register(RegisterModel registerModel)
+        public async Task<ServiceResponse<UserDTO>> Register(RegisterDTO registerModel)
         {
-            ServiceResponse<UserModel> serviceResponse = new ServiceResponse<UserModel>();
+            ServiceResponse<UserDTO> serviceResponse = new ServiceResponse<UserDTO>();
 
             Boolean isUserExists = await _authRepository.IsUserExistByEmail(registerModel.Email);
 
@@ -54,8 +54,8 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            UserEntityModel user = AuthMapper.GetUserEntityModel(registerModel);
-            PasswordModel passwordModel = PasswordHelper.CreatePasswordHash(registerModel.Password);
+            User user = AuthMapper.GetUserEntityModel(registerModel);
+            PasswordDTO passwordModel = PasswordHelper.CreatePasswordHash(registerModel.Password);
             user.PasswordHash = passwordModel.PasswordHash;
             user.PasswordSalt = passwordModel.PasswordSalt;
             await _authRepository.AddUser(user);
@@ -65,7 +65,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<Boolean>> RestorePassword(RestorePasswordModel restorePasswordModel)
+        public async Task<ServiceResponse<Boolean>> RestorePassword(RestorePasswordDTO restorePasswordModel)
         {
             ServiceResponse<Boolean> serviceResponse = new ServiceResponse<Boolean>();
 
@@ -77,8 +77,8 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            UserEntityModel user = await _authRepository.Get(restorePasswordModel.Email);
-            PasswordModel passwordModel = PasswordHelper.CreatePasswordHash(restorePasswordModel.Password);
+            User user = await _authRepository.Get(restorePasswordModel.Email);
+            PasswordDTO passwordModel = PasswordHelper.CreatePasswordHash(restorePasswordModel.Password);
             user.PasswordHash = passwordModel.PasswordHash;
             user.PasswordSalt = passwordModel.PasswordSalt;
             await _authRepository.UpdateUser(user);

@@ -10,6 +10,7 @@ namespace BeautyTrackSystem.BLL.Extensions
         {
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IPatientService, PatientService>();
+            services.AddTransient<IProcedureService, ProcedureService>();
         }
     }
 }
