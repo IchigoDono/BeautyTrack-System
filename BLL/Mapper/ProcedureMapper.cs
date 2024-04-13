@@ -7,7 +7,7 @@ namespace BeautyTrackSystem.BLL.Mapper
     {
         public static ProcedureDTO GetProcedureModel(Procedure procedureEntityModel)
         {
-            ProcedureDTO procedureModel = new ProcedureDTO
+            ProcedureDTO procedureModel = new()
             {
                 Id = procedureEntityModel.Id,
                 ProcedureName = procedureEntityModel.ProcedureName
@@ -17,7 +17,7 @@ namespace BeautyTrackSystem.BLL.Mapper
 
         public static Procedure GetProcedureAddModel(ProcedureDTO procedureModel)
         {
-            Procedure procedureEntityModel = new Procedure
+            Procedure procedureEntityModel = new()
             {
                 ProcedureName = procedureModel.ProcedureName
             };
@@ -25,9 +25,9 @@ namespace BeautyTrackSystem.BLL.Mapper
         }
         public static Procedure GetProcedureUpdateModel(ProcedureDTO procedureModel)
         {
-            Procedure procedureEntityModel = new Procedure
+            Procedure procedureEntityModel = new()
             {
-                Id = procedureModel.Id,
+                Id = procedureModel.Id ?? default,
                 ProcedureName = procedureModel.ProcedureName
             };
             return procedureEntityModel;

@@ -17,7 +17,7 @@ namespace BeautyTrack_System.Mapper
 
         public static RegisterDTO GetRegisterModel(RegisterViewModel registerViewModel)
         {
-            RegisterDTO registerModel = new RegisterDTO 
+            RegisterDTO registerModel = new RegisterDTO
             {
                 FirstName = registerViewModel.FirstName,
                 LastName = registerViewModel.LastName,

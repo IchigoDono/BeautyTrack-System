@@ -11,15 +11,35 @@ namespace DLL
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) 
-            : base(options) 
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-          .HasKey(x => x.Id);
+                .HasKey(x => x.Id);
+
+
+            modelBuilder.Entity<Appointment>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Patient>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Procedure>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne(s => s.Patient)
+                .WithMany(g => g.Appointments)
+                .HasForeignKey(s => s.PatientId);
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne(s => s.Procedure)
+                .WithMany(g => g.Appointments)
+                .HasForeignKey(s => s.ProcedureId);
 
             base.OnModelCreating(modelBuilder);
         }

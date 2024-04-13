@@ -20,8 +20,8 @@ namespace BeautyTrackSystem.BLL.Extensions
                 //new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
-           SymmetricSecurityKey key =
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JWT_TOP_SECRET_KEYYES_JUST_FOR_EXAMPLE_PURPOSES_BUT_MAKE_IT_LONGER"));
+            SymmetricSecurityKey key =
+                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JWT_TOP_SECRET_KEYYES_JUST_FOR_EXAMPLE_PURPOSES_BUT_MAKE_IT_LONGER"));
 
             ClaimsIdentity subject = new ClaimsIdentity(claims);
             DateTime expires = DateTime.Now.AddDays(1);

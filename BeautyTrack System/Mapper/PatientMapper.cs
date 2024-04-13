@@ -11,7 +11,7 @@ namespace BeautyTrack_System.Mapper
             {
                 Id = patientViewModel.Id,
                 Name = patientViewModel.Name,
-                Surname = patientViewModel.Surname,   
+                Surname = patientViewModel.Surname,
                 Patronymic = patientViewModel.Patronymic,
                 Birthday = patientViewModel.Birthday,
                 PhomeNumber = patientViewModel.PhomeNumber

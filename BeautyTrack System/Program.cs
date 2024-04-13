@@ -1,17 +1,17 @@
-using DLL;
-using Microsoft.EntityFrameworkCore;
 using BeautyTrackSystem.BLL.Extensions;
 using BeautyTrackSystem.DLL.Extensions;
+using DLL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = """Standart Authorization header using the Bearer scheme. Example: "bearer {token}" """,
         In = ParameterLocation.Header,
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey    
+        Type = SecuritySchemeType.ApiKey
 
     });
 

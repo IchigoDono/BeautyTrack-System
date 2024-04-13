@@ -1,5 +1,4 @@
 ﻿using BeautyTrackSystem.BLL.Mapper;
-using BeautyTrackSystem.BLL.Models.PatientModels;
 using BeautyTrackSystem.BLL.Models.ProcedureDTOs;
 using BeautyTrackSystem.BLL.Models.Responses;
 using BeautyTrackSystem.BLL.Services.Interfaces;
@@ -110,8 +109,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            Procedure procedureEntityModel = new Procedure();
-            procedureEntityModel = await _procedureRepository.GetById(id);
+            Procedure procedureEntityModel = await _procedureRepository.GetById(id);
 
             await _procedureRepository.Delete(procedureEntityModel);
 

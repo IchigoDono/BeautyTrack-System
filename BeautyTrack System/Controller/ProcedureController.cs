@@ -1,7 +1,5 @@
 ﻿using BeautyTrack_System.Mapper;
-using BeautyTrack_System.Models.PatientModels;
 using BeautyTrack_System.Models.ProcedureModels;
-using BeautyTrackSystem.BLL.Models.PatientModels;
 using BeautyTrackSystem.BLL.Models.ProcedureDTOs;
 using BeautyTrackSystem.BLL.Models.Responses;
 using BeautyTrackSystem.BLL.Services.Interfaces;

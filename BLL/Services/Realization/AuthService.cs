@@ -19,7 +19,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
         public async Task<ServiceResponse<JwtDTO>> Login(LoginDTO loginModel)
         {
             ServiceResponse<JwtDTO> serviceResponse = new ServiceResponse<JwtDTO>();
-            User userEntityModel =  await _authRepository.Get(loginModel.Email);
+            User userEntityModel = await _authRepository.Get(loginModel.Email);
             if (userEntityModel == null)
             {
                 serviceResponse.Message = "Incorrect username or password";
