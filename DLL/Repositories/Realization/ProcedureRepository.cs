@@ -32,6 +32,12 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
             return success;
         }
 
+        public async Task<Boolean> IsProcedureExist(String? procedureName, Int32? id)
+        {
+            Boolean success = await _applicationContext.Procedures.AnyAsync(x => x.ProcedureName == procedureName && x.Id != id);
+            return success;
+        }
+
         public async Task<Boolean> IsProcedureExistById(Int32? id)
         {
             Boolean success = await _applicationContext.Procedures.AnyAsync(x => x.Id == id);

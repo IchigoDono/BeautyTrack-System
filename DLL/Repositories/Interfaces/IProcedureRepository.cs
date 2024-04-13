@@ -10,6 +10,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Interfaces
         Task UpdateProcedure(Procedure procedureEntityModel);
         Task Delete(Procedure procedureEntityModel);
         Task<Boolean> IsProcedureExistByName(String? procedureName);
+        Task<Boolean> IsProcedureExist(String? procedureName, Int32? id);
         Task<Boolean> IsProcedureExistById(Int32? id);
     }
 }

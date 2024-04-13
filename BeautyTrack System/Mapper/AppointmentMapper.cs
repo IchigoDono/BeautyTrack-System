@@ -12,8 +12,7 @@ namespace BeautyTrack_System.Mapper
                 Id = appointmentViewModel.Id,
                 Date = appointmentViewModel.Date,
                 PatientId = appointmentViewModel.PatientId,
-                ProcedureId = appointmentViewModel.ProcedureId,
-                Price = appointmentViewModel.Price
+                ProcedureId = appointmentViewModel.ProcedureId
             };
             return appointment;
         }

@@ -81,7 +81,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            Boolean isProcedureNameExists = await _procedureRepository.IsProcedureExistByName(procedureModel.ProcedureName);
+            Boolean isProcedureNameExists = await _procedureRepository.IsProcedureExist(procedureModel.ProcedureName, procedureModel.Id);
             if (isProcedureNameExists)
             {
                 serviceResponse.Message = "Procedure already exist";

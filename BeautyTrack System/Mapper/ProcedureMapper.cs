@@ -10,7 +10,8 @@ namespace BeautyTrack_System.Mapper
             ProcedureDTO procedure = new ProcedureDTO
             {
                 Id = procedureViewModel.Id,
-                ProcedureName = procedureViewModel.ProcedureName
+                ProcedureName = procedureViewModel.ProcedureName,
+                Price = procedureViewModel.Price
             };
             return procedure;
         }

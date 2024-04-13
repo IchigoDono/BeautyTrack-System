@@ -8,5 +8,7 @@ namespace BeautyTrack_System.Models.ProcedureModels
         [Required]
         [StringLength(60, MinimumLength = 1)]
         public String ProcedureName { get; set; }
+        [Required]
+        public Decimal Price { get; set; }
     }
 }

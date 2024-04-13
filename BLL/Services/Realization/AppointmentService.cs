@@ -10,15 +10,35 @@ namespace BeautyTrackSystem.BLL.Services.Realization
     public class AppointmentService : IAppointmentService
     {
         private readonly IAppointmentRepository _appointmentRepository;
-        public AppointmentService(IAppointmentRepository appointmentRepository)
+        private readonly IProcedureRepository _procedureRepository;
+        private readonly IPatientRepository _patientRepository;
+        public AppointmentService(IAppointmentRepository appointmentRepository, IProcedureRepository procedureRepository, IPatientRepository patientRepository)
         {
             _appointmentRepository = appointmentRepository;
+            _procedureRepository = procedureRepository;
+            _patientRepository = patientRepository;
         }
 
         public async Task<ServiceResponse<AppointmentAddDTO>> AddAppointment(AppointmentAddDTO appointmentModel)
         {
             ServiceResponse<AppointmentAddDTO> serviceResponse = new ServiceResponse<AppointmentAddDTO>();
 
+            Patient patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
+
+            if (patientEntityModel == null)
+            {
+                serviceResponse.Message = "Patient is not exist";
+                return serviceResponse;
+            }
+
+            Procedure procedureEntityModel = await _procedureRepository.GetById(appointmentModel.ProcedureId);
+
+            if (procedureEntityModel == null)
+            {
+                serviceResponse.Message = "Procedure is not exist";
+                return serviceResponse;
+            }
+            appointmentModel.Price = procedureEntityModel.Price;
             Appointment appointmentEntityModel = AppointmentMapper.GetAppointmentAddModel(appointmentModel);
 
             await _appointmentRepository.AddAppointment(appointmentEntityModel);
@@ -40,6 +60,22 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 serviceResponse.Message = "Appointment is not exist";
                 return serviceResponse;
             }
+            Patient patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
+
+            if (patientEntityModel == null)
+            {
+                serviceResponse.Message = "Patient is not exist";
+                return serviceResponse;
+            }
+
+            Procedure procedureEntityModel = await _procedureRepository.GetById(appointmentModel.ProcedureId);
+
+            if (procedureEntityModel == null)
+            {
+                serviceResponse.Message = "Procedure is not exist";
+                return serviceResponse;
+            }
+            appointmentModel.Price = procedureEntityModel.Price;
 
             Appointment appointmentEntityModel = AppointmentMapper.GetAppointmentUpdateModel(appointmentModel);
 

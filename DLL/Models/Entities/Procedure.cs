@@ -4,6 +4,7 @@
     {
         public Int32 Id { get; set; }
         public String ProcedureName { get; set; }
+        public Decimal Price { get; set; }
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
     }
 }

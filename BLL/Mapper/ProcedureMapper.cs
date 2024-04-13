@@ -10,7 +10,8 @@ namespace BeautyTrackSystem.BLL.Mapper
             ProcedureDTO procedureModel = new()
             {
                 Id = procedureEntityModel.Id,
-                ProcedureName = procedureEntityModel.ProcedureName
+                ProcedureName = procedureEntityModel.ProcedureName,
+                Price = procedureEntityModel.Price
             };
             return procedureModel;
         }
@@ -19,7 +20,8 @@ namespace BeautyTrackSystem.BLL.Mapper
         {
             Procedure procedureEntityModel = new()
             {
-                ProcedureName = procedureModel.ProcedureName
+                ProcedureName = procedureModel.ProcedureName,
+                Price = procedureModel.Price
             };
             return procedureEntityModel;
         }
@@ -28,7 +30,8 @@ namespace BeautyTrackSystem.BLL.Mapper
             Procedure procedureEntityModel = new()
             {
                 Id = procedureModel.Id ?? default,
-                ProcedureName = procedureModel.ProcedureName
+                ProcedureName = procedureModel.ProcedureName,
+                Price = procedureModel.Price
             };
             return procedureEntityModel;
         }

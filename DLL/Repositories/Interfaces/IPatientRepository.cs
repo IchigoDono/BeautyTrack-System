@@ -5,6 +5,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Interfaces
     public interface IPatientRepository
     {
         Task<Patient> GetByPhone(String phoneNumber);
+        Task<Patient> GetById(Int32 id);
         Task<List<Patient>> GetAll();
         Task AddPatient(Patient patientEntityModel);
         Task UpdatePatient(Patient patientEntityModel);

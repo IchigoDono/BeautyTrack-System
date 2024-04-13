@@ -56,5 +56,12 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
             _applicationContext.Patients.Update(patientEntityModel);
             await _applicationContext.SaveChangesAsync();
         }
+
+        public async Task<Patient> GetById(Int32 id)
+        {
+            Patient patientEntityModel =
+                 await _applicationContext.Patients.FirstOrDefaultAsync(u => u.Id == id);
+            return patientEntityModel;
+        }
     }
 }
