@@ -13,8 +13,8 @@ namespace BeautyTrack_System.Mapper
                 Name = patientViewModel.Name,
                 Surname = patientViewModel.Surname,
                 Patronymic = patientViewModel.Patronymic,
-                Birthday = patientViewModel.Birthday,
-                PhomeNumber = patientViewModel.PhomeNumber
+                Birthday = new DateOnly(patientViewModel.Birthday.Year, patientViewModel.Birthday.Month, patientViewModel.Birthday.Day),
+                PhoneNumber = patientViewModel.PhoneNumber
             };
             return patient;
         }

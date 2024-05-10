@@ -9,5 +9,6 @@
         public Decimal Price { get; set; }
         public Patient Patient { get; set; }
         public Procedure Procedure { get; set; }
+        public ICollection<AppointmentDescription> AppointmentDescriptions { get; set; } = new HashSet<AppointmentDescription>();
     }
 }

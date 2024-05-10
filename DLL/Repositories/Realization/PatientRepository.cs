@@ -16,7 +16,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
         public async Task<Patient> GetByPhone(String phoneNumber)
         {
             Patient patientEntityModel =
-                 await _applicationContext.Patients.FirstOrDefaultAsync(u => u.PhomeNumber.Equals(phoneNumber));
+                 await _applicationContext.Patients.FirstOrDefaultAsync(u => u.PhoneNumber.Equals(phoneNumber));
             return patientEntityModel;
         }
         public async Task<List<Patient>> GetAll()
@@ -28,7 +28,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
 
         public async Task<Boolean> IsPatientExistByPhone(string phoneNumber)
         {
-            Boolean success = await _applicationContext.Patients.AnyAsync(x => x.PhomeNumber == phoneNumber);
+            Boolean success = await _applicationContext.Patients.AnyAsync(x => x.PhoneNumber == phoneNumber);
             return success;
         }
 

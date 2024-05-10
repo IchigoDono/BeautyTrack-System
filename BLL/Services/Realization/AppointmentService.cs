@@ -123,7 +123,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<bool>> DeleteProcedure(int id)
+        public async Task<ServiceResponse<Boolean>> DeleteProcedure(Int32 id)
         {
             ServiceResponse<Boolean> serviceResponse = new ServiceResponse<Boolean>();
             Boolean isAppointmentExists = await _appointmentRepository.IsAppointmentExistById(id);
@@ -131,7 +131,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             if (!isAppointmentExists)
             {
                 serviceResponse.IsSuccess = false;
-                serviceResponse.Message = "Procedure is not exist";
+                serviceResponse.Message = "Appointment is not exist";
                 return serviceResponse;
             }
 

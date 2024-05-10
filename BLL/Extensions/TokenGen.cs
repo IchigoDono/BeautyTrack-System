@@ -17,7 +17,7 @@ namespace BeautyTrackSystem.BLL.Extensions
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                //new Claim(ClaimTypes.Role, user.RoleId.ToString())
+                new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
             SymmetricSecurityKey key =

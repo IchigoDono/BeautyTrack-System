@@ -13,7 +13,7 @@ namespace BeautyTrackSystem.BLL.Mapper
                 Surname = patientModel.Surname,
                 Patronymic = patientModel.Patronymic,
                 Birthday = patientModel.Birthday,
-                PhomeNumber = patientModel.PhomeNumber
+                PhoneNumber = patientModel.PhoneNumber
             };
             return patientEntityModel;
         }
@@ -27,7 +27,7 @@ namespace BeautyTrackSystem.BLL.Mapper
                 Surname = patientModel.Surname,
                 Patronymic = patientModel.Patronymic,
                 Birthday = patientModel.Birthday,
-                PhomeNumber = patientModel.PhomeNumber
+                PhoneNumber = patientModel.PhoneNumber
             };
             return patientEntityModel;
         }
@@ -41,7 +41,7 @@ namespace BeautyTrackSystem.BLL.Mapper
                 Surname = patientEntityModel.Surname,
                 Patronymic = patientEntityModel.Patronymic,
                 Birthday = patientEntityModel.Birthday,
-                PhomeNumber = patientEntityModel.PhomeNumber
+                PhoneNumber = patientEntityModel.PhoneNumber
             };
             return patientModel;
         }

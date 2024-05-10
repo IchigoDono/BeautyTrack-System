@@ -7,14 +7,14 @@ namespace BeautyTrack_System.Models.PatientModels
         public Int32? Id { get; set; }
         [Required]
         [StringLength(60, MinimumLength = 1)]
-        public string Name { get; set; }
+        public String Name { get; set; }
         [Required]
         [StringLength(60, MinimumLength = 1)]
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-        public DateOnly Birthday { get; set; }
+        public String Surname { get; set; }
+        public String Patronymic { get; set; }
+        public DateTime Birthday { get; set; }
         [Required]
         [StringLength(60, MinimumLength = 10)]
-        public string PhomeNumber { get; set; }
+        public String PhoneNumber { get; set; }
     }
 }

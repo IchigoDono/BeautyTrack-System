@@ -10,6 +10,7 @@ namespace DLL
         public DbSet<Procedure> Procedures { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<AppointmentDescription> AppointmentDescriptions { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
@@ -21,7 +22,6 @@ namespace DLL
             modelBuilder.Entity<User>()
                 .HasKey(x => x.Id);
 
-
             modelBuilder.Entity<Appointment>()
                 .HasKey(x => x.Id);
 
@@ -31,15 +31,24 @@ namespace DLL
             modelBuilder.Entity<Procedure>()
                 .HasKey(x => x.Id);
 
+            modelBuilder.Entity<AppointmentDescription>()
+                .HasKey(x => x.Id);
+
             modelBuilder.Entity<Appointment>()
                 .HasOne(s => s.Patient)
                 .WithMany(g => g.Appointments)
                 .HasForeignKey(s => s.PatientId);
 
+
             modelBuilder.Entity<Appointment>()
                 .HasOne(s => s.Procedure)
                 .WithMany(g => g.Appointments)
                 .HasForeignKey(s => s.ProcedureId);
+
+            modelBuilder.Entity<AppointmentDescription>()
+                .HasOne(s => s.Appointment)
+                .WithMany(x => x.AppointmentDescriptions)
+                .HasForeignKey(s => s.AppointmentId);
 
             base.OnModelCreating(modelBuilder);
         }

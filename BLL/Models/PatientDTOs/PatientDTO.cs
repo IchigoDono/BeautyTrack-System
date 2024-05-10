@@ -7,6 +7,6 @@
         public String Surname { get; set; }
         public String Patronymic { get; set; }
         public DateOnly Birthday { get; set; }
-        public String PhomeNumber { get; set; }
+        public String PhoneNumber { get; set; }
     }
 }

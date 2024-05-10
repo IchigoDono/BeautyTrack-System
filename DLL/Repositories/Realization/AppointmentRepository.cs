@@ -36,7 +36,7 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
 
         public async Task<Boolean> IsAppointmentExistByPhone(String? phoneNumber)
         {
-            Boolean success = await _applicationContext.Appointments.AnyAsync(x => x.Patient.PhomeNumber == phoneNumber);
+            Boolean success = await _applicationContext.Appointments.AnyAsync(x => x.Patient.PhoneNumber == phoneNumber);
             return success;
         }
 

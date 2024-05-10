@@ -12,6 +12,7 @@ namespace BeautyTrackSystem.DLL.Extensions
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IAppointmentDescriptionRepository,  AppointmentDescriptionRepository>();
         }
     }
 }
