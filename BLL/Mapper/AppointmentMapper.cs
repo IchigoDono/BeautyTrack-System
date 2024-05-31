@@ -5,12 +5,12 @@ namespace BeautyTrackSystem.BLL.Mapper
 {
     public class AppointmentMapper
     {
-        public static AppointmentDTO GetAppointmenModel(Appointment appointmentEntityModel)
+        public static AppointmentGetDTO GetAppointmenModel(Appointment appointmentEntityModel)
         {
-            AppointmentDTO procedureModel = new AppointmentDTO
+            AppointmentGetDTO procedureModel = new AppointmentGetDTO
             {
                 Id = appointmentEntityModel.Id,
-                Date = appointmentEntityModel.Date,
+                Date = appointmentEntityModel.Date.ToString("yyyy-MM-dd HH:mm:ss"),
                 FullName = appointmentEntityModel.Patient.Name + " " + appointmentEntityModel.Patient.Surname + " " + appointmentEntityModel.Patient.Patronymic,
                 ProcedureName = appointmentEntityModel.Procedure.ProcedureName,
                 Price = appointmentEntityModel.Price

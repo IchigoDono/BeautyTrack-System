@@ -16,17 +16,29 @@ namespace BeautyTrack_System.Controller
         {
             _appointmentService = appointmentService;
         }
+        [HttpGet("GetReport")]
+        public async Task<IActionResult> GetReport(DateTime appointmentDate)
+        {
+            ServiceResponse<MemoryStream> response = await _appointmentService.GetReport(appointmentDate);
+            return File(response.Data.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Appointments.xlsx");
+        }
 
         [HttpGet("GetAppointmentByPatient")]
         public async Task<IActionResult> GetAppointmentByPatient(Int32 id)
         {
-            ServiceResponse<List<AppointmentDTO>> response = await _appointmentService.GetAppointmentByPatient(id);
+            ServiceResponse<List<AppointmentGetDTO>> response = await _appointmentService.GetAppointmentByPatient(id);
+            return Ok(response);
+        }
+        [HttpGet("GetAppointmentListByDate")]
+        public async Task<IActionResult> GetAppointmentListByDate(DateTime appointmentDate)
+        {
+            ServiceResponse<List<AppointmentGetDTO>> response = await _appointmentService.GetAppointmentListByDate(appointmentDate);
             return Ok(response);
         }
         [HttpGet("GetAppointmentList")]
-        public async Task<IActionResult> GetAppointmentList(DateTime appointmentDate)
+        public async Task<IActionResult> GetAppointmentList()
         {
-            ServiceResponse<List<AppointmentDTO>> response = await _appointmentService.GetAppointmentList(appointmentDate);
+            ServiceResponse<List<AppointmentGetDTO>> response = await _appointmentService.GetAppointmentList();
             return Ok(response);
         }
 

@@ -7,7 +7,7 @@
         public Int32 PatientId { get; set; }
         public Int32 ProcedureId { get; set; }
         public Decimal Price { get; set; }
-        public Patient Patient { get; set; }
+        public Client Patient { get; set; }
         public Procedure Procedure { get; set; }
         public ICollection<AppointmentDescription> AppointmentDescriptions { get; set; } = new HashSet<AppointmentDescription>();
     }

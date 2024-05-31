@@ -6,7 +6,7 @@ namespace DLL
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Client> Patients { get; set; }
         public DbSet<Procedure> Procedures { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<User> Users { get; set; }
@@ -25,7 +25,7 @@ namespace DLL
             modelBuilder.Entity<Appointment>()
                 .HasKey(x => x.Id);
 
-            modelBuilder.Entity<Patient>()
+            modelBuilder.Entity<Client>()
                 .HasKey(x => x.Id);
 
             modelBuilder.Entity<Procedure>()

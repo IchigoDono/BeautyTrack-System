@@ -4,6 +4,10 @@ using BeautyTrackSystem.BLL.Models.Responses;
 using BeautyTrackSystem.BLL.Services.Interfaces;
 using BeautyTrackSystem.DLL.Models.Entities;
 using BeautyTrackSystem.DLL.Repositories.Interfaces;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
+using System.IO;
 
 namespace BeautyTrackSystem.BLL.Services.Realization
 {
@@ -23,7 +27,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
         {
             ServiceResponse<AppointmentAddDTO> serviceResponse = new ServiceResponse<AppointmentAddDTO>();
 
-            Patient patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
+            Client patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
 
             if (patientEntityModel == null)
             {
@@ -60,7 +64,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 serviceResponse.Message = "Appointment is not exist";
                 return serviceResponse;
             }
-            Patient patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
+            Client patientEntityModel = await _patientRepository.GetById(appointmentModel.PatientId);
 
             if (patientEntityModel == null)
             {
@@ -85,9 +89,9 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             serviceResponse.Data = appointmentModel;
             return serviceResponse;
         }
-        public async Task<ServiceResponse<List<AppointmentDTO>>> GetAppointmentByPatient(Int32 id)
+        public async Task<ServiceResponse<List<AppointmentGetDTO>>> GetAppointmentByPatient(Int32 id)
         {
-            ServiceResponse<List<AppointmentDTO>> serviceResponse = new ServiceResponse<List<AppointmentDTO>>();
+            ServiceResponse<List<AppointmentGetDTO>> serviceResponse = new ServiceResponse<List<AppointmentGetDTO>>();
 
             List<Appointment> appointmentEntityModel = await _appointmentRepository.GetByPatientId(id);
 
@@ -104,9 +108,28 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<AppointmentDTO>>> GetAppointmentList(DateTime appointmentDate)
+        public async Task<ServiceResponse<List<AppointmentGetDTO>>> GetAppointmentList()
         {
-            ServiceResponse<List<AppointmentDTO>> serviceResponse = new ServiceResponse<List<AppointmentDTO>>();
+            ServiceResponse<List<AppointmentGetDTO>> serviceResponse = new ServiceResponse<List<AppointmentGetDTO>>();
+
+            List<Appointment> appointmentEntityModel = await _appointmentRepository.GetAll();
+
+            if (appointmentEntityModel == null)
+            {
+                serviceResponse.Message = "Answer is null";
+                return serviceResponse;
+            }
+
+            serviceResponse.IsSuccess = true;
+            serviceResponse.Data = appointmentEntityModel
+                .Select(appointmentEntity => AppointmentMapper.GetAppointmenModel(appointmentEntity))
+                .ToList();
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<List<AppointmentGetDTO>>> GetAppointmentListByDate(DateTime appointmentDate)
+        {
+            ServiceResponse<List<AppointmentGetDTO>> serviceResponse = new ServiceResponse<List<AppointmentGetDTO>>();
 
             List<Appointment> appointmentEntityModel = await _appointmentRepository.GetByDate(appointmentDate);
 
@@ -123,6 +146,76 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             return serviceResponse;
         }
 
+        public async Task<ServiceResponse<MemoryStream>> GetReport(DateTime appointmentDate)
+        {
+            ServiceResponse<MemoryStream> serviceResponse = new ServiceResponse<MemoryStream>();
+
+            List<Appointment> appointmentEntityModel = await _appointmentRepository.GetByDate(appointmentDate);
+            List<AppointmentGetDTO> appointmentGetDTO = new List<AppointmentGetDTO>();
+
+            if (appointmentEntityModel == null)
+            {
+                serviceResponse.Message = "Answer is null";
+                return serviceResponse;
+            }
+
+            appointmentGetDTO = appointmentEntityModel
+                .Select(appointmentEntity => AppointmentMapper.GetAppointmenModel(appointmentEntity))
+                .ToList();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook))
+                {
+                    WorkbookPart workbookPart = document.AddWorkbookPart();
+                    workbookPart.Workbook = new Workbook();
+                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                    Worksheet worksheet = new Worksheet();
+                    SheetData sheetData = new SheetData();
+
+                    Row headerRow = new Row();
+                    headerRow.Append(
+                        new Cell { CellValue = new CellValue("Дата"), DataType = CellValues.String },
+                        new Cell { CellValue = new CellValue("ПІБ"), DataType = CellValues.String },
+                        new Cell { CellValue = new CellValue("Назва процедури"), DataType = CellValues.String },
+                        new Cell { CellValue = new CellValue("Ціна"), DataType = CellValues.String }
+                    );
+                    sheetData.AppendChild(headerRow);
+
+                    foreach (var appointment in appointmentGetDTO)
+                    {
+                        Row dataRow = new Row();
+                        dataRow.Append(
+                            new Cell { CellValue = new CellValue(appointment.Date), DataType = CellValues.String },
+                            new Cell { CellValue = new CellValue(appointment.FullName), DataType = CellValues.String },
+                            new Cell { CellValue = new CellValue(appointment.ProcedureName), DataType = CellValues.String },
+                            new Cell { CellValue = new CellValue(appointment.Price), DataType = CellValues.String }
+                        );
+                        sheetData.AppendChild(dataRow);
+                    }
+
+                    worksheet.AppendChild(sheetData);
+                    worksheetPart.Worksheet = worksheet;
+
+                    sheets.Append(new Sheet
+                    {
+                        Id = workbookPart.GetIdOfPart(worksheetPart),
+                        SheetId = 1,
+                        Name = "Appointments"
+                    });
+
+                    workbookPart.Workbook.Save();
+                }
+
+                stream.Position = 0;
+                serviceResponse.Data = stream;
+                serviceResponse.IsSuccess = true;
+                serviceResponse.Message = "Appointments retrieved and Excel file created successfully";
+
+                return serviceResponse;
+            }
+        }
         public async Task<ServiceResponse<Boolean>> DeleteProcedure(Int32 id)
         {
             ServiceResponse<Boolean> serviceResponse = new ServiceResponse<Boolean>();

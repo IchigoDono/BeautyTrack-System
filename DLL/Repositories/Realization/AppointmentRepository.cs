@@ -34,6 +34,19 @@ namespace BeautyTrackSystem.DLL.Repositories.Realization
             return appointmentEntityModel;
         }
 
+        public async Task<List<Appointment>> GetAll()
+        {
+            List<Appointment> appointmentEntityModel =
+                await _applicationContext.Appointments
+                    .Include(u => u.Patient)
+                    .Include(u => u.Procedure)
+                    .Where(u => u.Date >= DateTime.Now) 
+                    .OrderBy(u => u.Date)
+                    .ToListAsync();
+            return appointmentEntityModel;
+        }
+
+
         public async Task<Boolean> IsAppointmentExistByPhone(String? phoneNumber)
         {
             Boolean success = await _applicationContext.Appointments.AnyAsync(x => x.Patient.PhoneNumber == phoneNumber);

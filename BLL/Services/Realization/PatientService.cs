@@ -23,7 +23,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
         {
             ServiceResponse<List<PatientDTO>> serviceResponse = new ServiceResponse<List<PatientDTO>>();
 
-            List<Patient> patientEntityModel = await _patientRepository.GetAll();
+            List<Client> patientEntityModel = await _patientRepository.GetAll();
 
             if (patientEntityModel == null)
             {
@@ -45,7 +45,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             {
                 ServiceResponse<PatientDTO> serviceResponse = new ServiceResponse<PatientDTO>();
 
-                Patient patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
+                Client patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
 
                 if (patientEntityModel == null)
                 {
@@ -77,7 +77,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                     return serviceResponse;
                 }
 
-                Patient patientEntityModel = PatientMapper.GetPatientAddModel(patientModel);
+                Client patientEntityModel = PatientMapper.GetPatientAddModel(patientModel);
 
                 await _patientRepository.AddPatient(patientEntityModel);
 
@@ -109,7 +109,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
             //    return serviceResponse;
             //}
 
-            Patient patientEntityModel = PatientMapper.GetPatientUpdateModel(patientModel);
+            Client patientEntityModel = PatientMapper.GetPatientUpdateModel(patientModel);
 
             await _patientRepository.UpdatePatient(patientEntityModel);
 
@@ -130,7 +130,7 @@ namespace BeautyTrackSystem.BLL.Services.Realization
                 return serviceResponse;
             }
 
-            Patient patientEntityModel = new Patient();
+            Client patientEntityModel = new Client();
             patientEntityModel = await _patientRepository.GetByPhone(phoneNumber);
 
             await _patientRepository.Delete(patientEntityModel);

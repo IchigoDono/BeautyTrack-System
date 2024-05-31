@@ -4,6 +4,7 @@ using DLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyTrackSystem.DLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240520144717_DeleteProcedureIdInPatient")]
+    partial class DeleteProcedureIdInPatient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +78,7 @@ namespace BeautyTrackSystem.DLL.Migrations
                     b.ToTable("AppointmentDescriptions");
                 });
 
-            modelBuilder.Entity("BeautyTrackSystem.DLL.Models.Entities.Client", b =>
+            modelBuilder.Entity("BeautyTrackSystem.DLL.Models.Entities.Patient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,7 +158,7 @@ namespace BeautyTrackSystem.DLL.Migrations
 
             modelBuilder.Entity("BeautyTrackSystem.DLL.Models.Entities.Appointment", b =>
                 {
-                    b.HasOne("BeautyTrackSystem.DLL.Models.Entities.Client", "Patient")
+                    b.HasOne("BeautyTrackSystem.DLL.Models.Entities.Patient", "Patient")
                         .WithMany("Appointments")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -188,7 +191,7 @@ namespace BeautyTrackSystem.DLL.Migrations
                     b.Navigation("AppointmentDescriptions");
                 });
 
-            modelBuilder.Entity("BeautyTrackSystem.DLL.Models.Entities.Client", b =>
+            modelBuilder.Entity("BeautyTrackSystem.DLL.Models.Entities.Patient", b =>
                 {
                     b.Navigation("Appointments");
                 });
